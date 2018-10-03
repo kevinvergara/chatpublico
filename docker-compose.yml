@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  mysql_serve:
+    image: mysql:5.7
+    container_name: mysql_chatpublico
+    ports:
+      - 33060:3306
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: kevin123
+      MYSQL_DATABASE: chatpublicodb
+      MYSQL_ROOT_PASSWORD: kevin123
+  redis_serve:
+    image: redis:latest
+    container_name: redis_chatpublico
+    ports:
+     - "5000:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+  web:
+    build: .
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/opt/data
+    links:
+      - mysql_serve
+      - redis_serve
