@@ -18,7 +18,8 @@ class Comentario extends Model
         "post_idpost",
         "usuario_idusuario",
         "fecha_comentario",
-        "key_redis_comentario"
+        "key_redis_comentario",
+        "tipo_id_post"
     ];
 
 }

@@ -20,3 +20,12 @@ Route::get('home',
 //ajax
 Route::post('login-nick',
     ['as' => 'login_nick', 'uses' => 'HomeController@postLogIn']);
+
+Route::post('cargar-post',
+    ['as' => 'cargar_post', 'uses' => 'HomeController@cargarPosts']);
+    
+Route::post('cargar-chat',
+    ['as' => 'cargar_chat', 'uses' => 'HomeController@cargarChat']);
+    
+Route::post('guardar-comentario',
+    ['as' => 'guardar_comentario', 'uses' => 'HomeController@guardarComentario']);

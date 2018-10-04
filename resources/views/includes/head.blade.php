@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="chat publico prueba tecnica">
     <meta name="author" content="kevinvergara">
-    <title>FTE DIVISIONES</title>
+    <title>Chat Público</title>
     {{--ESTILOS--}}
     <link href="{{asset('/css/app.css') }}" rel="stylesheet" type="text/css">
     {{--FIN ESTILOS--}}

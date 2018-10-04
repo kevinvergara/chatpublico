@@ -52,7 +52,7 @@
                         },
                         beforeSend: function() {
                             swal({
-                                title: 'Creando Json Horas Hombre...',
+                                title: 'Entrando ...',
                                 allowOutsideClick: false,
                                 closeOnCancel: false,
                                 onOpen: () => {
