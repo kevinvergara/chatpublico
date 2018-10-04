@@ -1,10 +1,31 @@
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
 
+// Variables
 @import "variables";
 
-@import "~bootstrap/scss/bootstrap";
+// Bootstrap
+@import '~bootstrap/dist/css/bootstrap.css';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+// admin lte
+@import '~admin-lte/dist/css/AdminLTE.css';
+@import '~admin-lte/dist/css/skins/_all-skins.css';
+
+//datatables
+@import '~datatables.net-bs/css/dataTables.bootstrap.css';
+@import '~datatables.net-fixedcolumns-dt/css/fixedColumns.dataTables.css';
+//@import '~datatables.net-buttons-dt/css/buttons.dataTables.css';
+
+
+//sweetalert
+@import '~sweetalert2/dist/sweetalert2.css';
+
+//select2
+@import '~select2/dist/css/select2.min.css';
+
+//jquery-ui
+@import '~jquery-ui/themes/base/all.css';
+
+//datepicker
+@import '~admin-lte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css';

@@ -16,11 +16,24 @@ try {
     require('bootstrap');
 } catch (e) {}
 
+require('admin-lte');
+require('select2/dist/js/select2.full');
+require('admin-lte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker');
+
+//datatable
+require('datatables.net/js/jquery.dataTables');
+require('datatables.net-bs/js/dataTables.bootstrap');
+
+require( 'datatables.net-fixedcolumns/js/dataTables.fixedColumns' );
+require( 'datatables.net-fixedcolumns-dt/js/fixedColumns.dataTables' );
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+
+window.swal = require('sweetalert2');
 
 window.axios = require('axios');
 

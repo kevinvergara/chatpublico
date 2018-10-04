@@ -13,3 +13,10 @@
 
 Route::get('/',
     ['as' => '/', 'uses' => 'HomeController@index']);
+    
+Route::get('home',
+    ['as' => 'home', 'uses' => 'HomeController@indexHome']);
+
+//ajax
+Route::post('login-nick',
+    ['as' => 'login_nick', 'uses' => 'HomeController@postLogIn']);

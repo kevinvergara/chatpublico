@@ -9,21 +9,39 @@ use Illuminate\Http\Request;
 use App\Exceptions\CustomException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\DB;
 use Exception;
+use Log;
+use App\Models\Usuario;
 
-class HomeController
+class HomeController extends BaseController
 {
     public function index(){
         $data = array();
-        //Redis::set('usuario', 'd');
-        //var_dump(Redis::get('usuario'));
-        return view("Home.index",$data);
+        return view("Home.login",$data);
     }
 
-    public function LogIn(Request $request){
+    public function postLogIn(Request $request){
         $data = array();
         $data = $request->all();
 
-        return "bien";
+        $contador = Usuario::where("nick_usuario","=",(string)$data["nick"])->count();
+        if($contador == 0){
+            $usuario = new Usuario;
+            $usuario->nick_usuario = $data["nick"];
+            $usuario->fecha_creacion = date("Y-m-d H:i:s");
+            $usuario->nombre_usuario = "";
+            $usuario->save();
+
+            Redis::set($data["token_"], $data["nick"]);
+        }
+
+        return '/home';
+    }
+
+    public function indexHome(){
+        $data = array();
+        
+        return view("Home.index",$data);
     }
 }
