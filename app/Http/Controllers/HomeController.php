@@ -16,6 +16,8 @@ use App\Models\Usuario;
 use App\Models\Post;
 use App\Models\Comentario;
 use App\Models\TipoComentario;
+use App\Events\eventTrigger;
+use App\Listeners\popUpBox;
 
 class HomeController extends BaseController
 {
@@ -70,7 +72,7 @@ class HomeController extends BaseController
         
         $chat = Comentario::join('usuario', 'comentario.usuario_idusuario', '=', 'usuario.idusuario')
                         ->where("comentario.post_idpost",$post->idpost)
-                        ->orderBy("comentario.fecha_comentario","ASC")
+                        ->orderBy("comentario.fecha_comentario","DESC")
                         ->select(
                             "comentario.idcomentario as id_comentario",
                             "comentario.comentario_text as comentario",
@@ -109,6 +111,8 @@ class HomeController extends BaseController
                 $path_file = Storage::put("public", $request->file("archivo"), 'public');
                 $extension = strtolower($data["archivo"]->extension());
                 
+                $path_file = str_replace("public/","",$path_file);
+
                 if(in_array($extension,$tipos_imagenes)){
                     $tipo_post = 2;
                 }else if(in_array($extension,$tipos_videos)){
@@ -129,11 +133,71 @@ class HomeController extends BaseController
             $new_post->key_redis_comentario = $key;
             $new_post->tipo_id_post = $tipo_post;
             $new_post->save();
+
+            event(new eventTrigger((string)$nick ,(string) $data["id_post"]));
         }else{
-            return "session invalida";
+            return "sesión inválida";
         }
 
 
         return "exito";
     }
+
+    public function recargarChat(Request $request){
+        $data = array();
+        $data = $request->all();
+
+        $post = Post::find($data["id_post"]);
+
+        $chat = Comentario::join('usuario', 'comentario.usuario_idusuario', '=', 'usuario.idusuario')
+                        ->where("comentario.post_idpost",$post->idpost)
+                        ->orderBy("comentario.fecha_comentario","DESC")
+                        ->select(
+                            "comentario.idcomentario as id_comentario",
+                            "comentario.comentario_text as comentario",
+                            "comentario.extension_archivo as extension_arch",
+                            "comentario.ruta_archivo as ruta_storage",
+                            "comentario.usuario_idusuario as id_user",
+                            "comentario.fecha_comentario as fecha",
+                            "comentario.key_redis_comentario as key_redis",
+                            "comentario.tipo_id_post as tipo_comentario",
+                            "usuario.nick_usuario as nick_user"
+                        )
+                        ->get();
+
+        return view("Home.partials.chat_reload",array(
+            "chat" => $chat
+            ))->render();
+    }
+
+    public function crearPostVista(Request $request){
+        $data = array();
+        $data = $request->all();
+
+        $nick = Redis::get($data["_token"]);
+        $usuario = Usuario::where("nick_usuario","=",(string)$nick)->first();
+
+        return view("Home.partials.crear_post",array("usuario" => $usuario))->render();
+    }
+
+    public function guardarPost(Request $request){
+        $data = array();
+        $data = $request->all();
+
+        $nick = Redis::get($data["_token"]);
+        $usuario = Usuario::where("nick_usuario","=",(string)$nick)->first();
+
+        if($usuario->count() != 0){
+            $new_post = new Post;
+            $new_post->texto = $data["comentario-text"];
+            $new_post->fecha_post = date("Y-m-d H:i:s");
+            $new_post->usuario_idusuario  = $usuario->idusuario;
+            $new_post->save();
+        }else{
+            return "error";
+        }
+
+        return $new_post->idpost;
+    }
+
 }

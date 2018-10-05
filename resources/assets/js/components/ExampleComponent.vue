@@ -17,7 +17,10 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            Echo.channel('channel-chatpublico')
+            .listen('eventTrigger', (e) => {
+                alert("salto el evento");
+            });
         }
     }
 </script>

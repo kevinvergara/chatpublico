@@ -29,3 +29,12 @@ Route::post('cargar-chat',
     
 Route::post('guardar-comentario',
     ['as' => 'guardar_comentario', 'uses' => 'HomeController@guardarComentario']);
+    
+Route::post('recargar-chat',
+    ['as' => 'recargar_chat', 'uses' => 'HomeController@recargarChat']);
+
+Route::post('crear-post-vista',
+    ['as' => 'crear_post_vista', 'uses' => 'HomeController@crearPostVista']);
+    
+Route::post('crear-post-guardar',
+    ['as' => 'crear_post_guardar', 'uses' => 'HomeController@guardarPost']);

@@ -27,6 +27,8 @@
         "datatables.net-buttons-dt": "^1.5.3",
         "datatables.net-colreorder-dt": "^1.5.1",
         "datatables.net-dt": "^1.10.19",
-        "datatables.net-fixedcolumns-dt": "^3.2.6"
+        "datatables.net-fixedcolumns-dt": "^3.2.6",
+        "laravel-echo": "^1.4.0",
+        "pusher-js": "^4.3.1"
     }
 }

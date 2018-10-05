@@ -23,7 +23,7 @@
                         <input type="text" id="inputnick" class="form-control" placeholder="Nick" required="" autofocus="">
                         <br>
                         <button class="btn btn-lg btn-primary btn-block btn-login" type="button">Entrar</button>
-                        
+                        <hr><br>
                         <p class="mt-5 mb-3 text-muted">© kevin 2018</p>
                     </form>
                 </div>

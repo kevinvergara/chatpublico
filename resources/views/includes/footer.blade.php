@@ -7,6 +7,7 @@
 
 <div>
     <footer class="main" style="display: table; text-align: center; margin-left: auto; margin-right: auto;">
+        <hr>
         &copy; Software propiedad <strong>Kevin Vergara</strong> 2018
     </footer>
 </div>

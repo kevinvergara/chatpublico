@@ -18,5 +18,24 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    created(){
+        Echo.channel('channel-chatpublico')
+            .listen('.newMessage', (e) => {
+                var user = e["user"];
+                var message = e["message"];
+                var mensaje_mostrar = "el usuario "+user+" comento el post #"+message;
+                var toast = swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 6000
+                });
+                  
+                toast({
+                    type: 'success',
+                    title: mensaje_mostrar
+                });
+            });
+    }
 });

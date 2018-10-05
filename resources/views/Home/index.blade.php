@@ -23,8 +23,7 @@
                     <div class="box-body no-padding">
                         <ul class="nav nav-pills nav-stacked">
                             <li><a href="#" id="elegir_chat"><i class="fa fa-inbox"></i> Comentar</a></li>
-                            <li><a href="#" id="notificaciones"><i class="fa fa-envelope-o"></i> Notificaciones</a></li>
-                            <li><a href="#" id="crear_post"><i class="fa fa-envelope-o"></i> Notificaciones</a></li>
+                            <li><a href="#" id="crear_post"><i class="fa fa-plus"></i> Crear Post</a></li>
                         </ul>
                     </div>
                 </div>
