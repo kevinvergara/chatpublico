@@ -1,0 +1,47 @@
+FROM ubuntu:latest
+
+MAINTAINER KEVINVERGARA VERSION 1
+
+#hacer que la consola no sea interactiva
+ENV DEBIAN_FRONTEND noninteractive
+#--------------------------------
+
+#instalar apache y php
+RUN apt-get update && \
+	apt-get install -y apache2 && \
+	apt-get install -y php php-mysql php-curl php-gd php-mbstring php-xml htop zip iputils-ping && \
+	apt-get install -y libapache2-mod-php && \
+	apt-get install -y build-essential
+	
+RUN apt-get install -y curl && \
+	apt-get install -y nano
+	
+#-------------------------	
+	
+#composer, git y node
+RUN apt-get update && \
+  curl -sS https://getcomposer.org/installer | php \
+  && chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
+
+RUN apt-get install -y git-core openssl libssl-dev python3
+
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash
+RUN apt-get install --yes nodejs
+
+RUN apt-get install -y git
+#----------------------
+
+#configurar apache
+RUN a2enmod rewrite
+
+EXPOSE 80
+
+ADD apache.conf /etc/apache/sites-enable/000-default.conf
+
+RUN service apache2 restart
+
+CMD /usr/sbin/apache2ctl -D FOREGROUND
+
+# Cleanup
+RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y
+#---------------------
