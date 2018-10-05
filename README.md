@@ -35,6 +35,6 @@ Proyecto hecho con el framework de php, laravel, trata a grandes rasgos de un ch
 
 ## License
 
-**Kevin Andres Vergara Muñoz**
-**Ing. civil informático**
-**Pontificia universidad católica de valparaíso**
+- **Kevin Andres Vergara Muñoz**
+- **Ing. civil informático**
+- **Pontificia universidad católica de valparaíso**
